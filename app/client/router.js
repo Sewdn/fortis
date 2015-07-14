@@ -1,18 +1,18 @@
 FlowRouter.route('/', {
   action: function(params) {
     Session.set('tegenpartij', null);
-    FlowLayout.render('layout', { main: "afschriften", "title": "Fortis Bankafschriften" });
+    FlowLayout.render('layout', { main: "afschriften", title: "Verrichtingen"});
   }
 });
 
-FlowRouter.route('/tegenpartijen', {
+FlowRouter.route('/tegenpartijen/:id?', {
   action: function(params) {
-    var o = { main: "afschriften", "title": "Tegenpartijen" },
-        tp = Session.get('tegenpartij');
-    if(tp) {
-      o.title = tp;
+    if(params.id) {
+      Session.set('tegenpartij', params.id);
+      FlowLayout.render('layout', { main: "afschriften", title: "Verrichtingen"});
+    } else {
+      FlowLayout.render('layout', { main: "tegenpartijen", "title": "Tegenpartijen" });
     }
-    FlowLayout.render('layout', o);
   }
 });
 

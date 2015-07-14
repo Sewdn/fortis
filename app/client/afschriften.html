@@ -5,7 +5,7 @@
       <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
         <h2 class="mdl-card__title-text">
           {{#with selectedTegenpartij}}
-            {{ref}}
+            {{getTitle}}
           {{else}}
           Alle verrichtingen
           {{/with}}
@@ -13,10 +13,18 @@
       </div>
       {{#with selectedTegenpartij}}
       {{#with summary}}
-      <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-      sum: {{eur sum}}<br/>
-      total: {{total}}
-      </div>
+      <table class="mdl-data-table mdl-js-data-table">
+        <tbody>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><h6>Som van alle verrichtingen</h6></td>
+            <td><h6><strong>{{eur sum}}</strong></h6></td>
+          </tr>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><h6>Totaal aantal verrichtingen</h6></td>
+            <td><h6><strong>{{total}}</strong></h6></td>
+          </tr>
+        </tbody>
+      </table>
       {{/with}}
       {{/with}}
       <div class="mdl-card__actions mdl-card--border years">
@@ -40,7 +48,7 @@
     {{#each all}}
       <tr class="{{isSelected}}">
         <td class="mdl-data-table__cell--non-numeric">{{dateFormat date}}</td>
-        <td class="mdl-data-table__cell--non-numeric">{{getTegenpartij.ref}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{getTegenpartij.getTitle}}</td>
         <td>{{eur amount}}</td>
       </tr>
     {{/each}}
@@ -60,7 +68,7 @@
       {{date}}
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <a href="/tegenpartijen" class="party mdl-button mdl-js-button mdl-js-ripple-effect">{{getTegenpartij.ref}}</a>
+      <a href="/tegenpartijen/{{tegenpartij._str}}" class="party mdl-button mdl-js-button mdl-js-ripple-effect">{{getTegenpartij.getTitle}}</a>
     </div>
   </div>
   {{/with}}

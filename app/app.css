@@ -157,6 +157,13 @@ _:-ms-input-placeholder, :root .demo-graph {
   background-position: 90% 100%;
   background-repeat: no-repeat;
 }
+.demo-tegenpartij .mdl-data-table {
+  border:none;
+  width: 100%;
+}
+.demo-tegenpartij .mdl-data-table td {
+  border:none;
+}
 .demo-cards .mdl-card__actions a {
   color: #00BCD4;
   text-decoration: none;

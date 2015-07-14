@@ -1,9 +1,9 @@
 Meteor.methods({
   'summary': function(tp, year) {
-    var q = {tegenpartij: new MongoInternals.NpmModule.ObjectID(tp._str)};
+    var q = {tegenpartij: new MongoInternals.NpmModule.ObjectID(tp)};
     if(year){
-      var start = new Date(year, 1, 1);
-      var end = new Date(year, 12, 31);
+      var start = new Date(year, 0, 1);
+      var end = new Date(year, 11, 31);
       q = _.extend(q, {date: {$gte: start, $lt: end}});
     }
     var pipeline = [

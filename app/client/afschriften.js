@@ -39,7 +39,7 @@ Template.afschriften.helpers({
     var day = date.getDate();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
-    return [day, monthIndex, year].join('/');
+    return [day, monthIndex+1, year].join('/');
   },
   isSelected: function() {
     var s = Template.instance().selected.get();
@@ -50,7 +50,7 @@ Template.afschriften.helpers({
     return s && Afschriften.findOne(s);
   },
   selectedTegenpartij: function() {
-    return Tegenpartijen.findOne(Session.get('tegenpartij'));
+    return Tegenpartijen.findOne(new Mongo.ObjectID(Session.get('tegenpartij')));
   },
   accentYear: function(year) {
     return Template.instance().year.get() === year ? "mdl-button--accent": "";
@@ -71,8 +71,5 @@ Template.afschriften.events({
       nY = null;
     }
     template.year.set(nY);
-  },
-  "click .party": function(event, template){
-    Session.set('tegenpartij', this.tegenpartij);
   }
 });

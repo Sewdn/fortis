@@ -1,0 +1,57 @@
+<template name="layout">
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+      <div class="mdl-layout__header-row">
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+  <i class="material-icons">mood</i>
+</button>
+        <span class="mdl-layout-title">{{title}}</span>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+          <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+            <i class="material-icons">search</i>
+          </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" id="search" />
+            <label class="mdl-textfield__label" for="search">Enter your query...</label>
+          </div>
+        </div>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+          <i class="material-icons">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+          <li class="mdl-menu__item">About</li>
+          <li class="mdl-menu__item">Contact</li>
+          <li class="mdl-menu__item">Legal information</li>
+        </ul>
+      </div>
+    </header>
+    <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+      <header class="demo-drawer-header">
+        <img src="/images/sewdn.jpg" class="demo-avatar">
+        <div class="demo-avatar-dropdown">
+          <span>001-3331235-40</span>
+          <div class="mdl-layout-spacer"></div>
+          <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons">arrow_drop_down</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+            <li class="mdl-menu__item">hello@example.com</li>
+            <li class="mdl-menu__item">info@example.com</li>
+            <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+          </ul>
+        </div>
+      </header>
+      <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+        <a class="mdl-navigation__link" href="/"><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Afschriften</a>
+        <a class="mdl-navigation__link" href="/tegenpartijen"><i class="mdl-color-text--blue-grey-400 material-icons">inbox</i>Tegenpartijen</a>
+        <a class="mdl-navigation__link" href="/groepen"><i class="mdl-color-text--blue-grey-400 material-icons">report</i>Groepen</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content mdl-color--grey-100">
+      <div class="mdl-grid demo-content">
+        {{> Template.dynamic template=main}}
+      </div>
+    </main>
+  </div>
+</template>

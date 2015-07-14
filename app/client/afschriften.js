@@ -50,7 +50,7 @@ Template.afschriften.helpers({
     return s && Afschriften.findOne(s);
   },
   selectedTegenpartij: function() {
-    return Session.get('tegenpartij');
+    return Tegenpartijen.findOne(Session.get('tegenpartij'));
   },
   accentYear: function(year) {
     return Template.instance().year.get() === year ? "mdl-button--accent": "";

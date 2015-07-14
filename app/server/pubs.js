@@ -1,6 +1,5 @@
-Meteor.publish('afschriften', function(year, tegenpartij){
+Meteor.publishComposite('afschriften', function(year, tegenpartij){
   var q = {};
-    console.log(year);
   if(year){
     //check(year, Number);
     var start = new Date(year, 1, 1);
@@ -14,5 +13,14 @@ Meteor.publish('afschriften', function(year, tegenpartij){
     });
   }
 
-  return Afschriften.find(q, {sort: {date: -1}, limit: 15});
+  return {
+    find: function() {
+      return Afschriften.find(q, {sort: {date: -1}, limit: 15});
+    },
+    children: [{
+      find: function(afschrift) {
+        return Tegenpartijen.find({_id: afschrift.tegenpartij});
+      }
+    }]
+  };
 });

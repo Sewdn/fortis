@@ -1,6 +1,6 @@
 Meteor.methods({
   'summary': function(tp, year) {
-    var q = {tegenpartij: tp};
+    var q = {tegenpartij: new MongoInternals.NpmModule.ObjectID(tp._str)};
     if(year){
       var start = new Date(year, 1, 1);
       var end = new Date(year, 12, 31);

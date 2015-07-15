@@ -12,3 +12,5 @@ meteorhacks:flow-layout
 meteorhacks:aggregate
 reywood:publish-composite
 dburles:collection-helpers
+gwendall:ui-hooks
+zodiase:mdl

@@ -4,10 +4,12 @@ Template.afschriften.onCreated(function(){
   this.year = new ReactiveVar();
   this.summary = new ReactiveVar();
   this.autorun(function(){
-    var tp = Session.get('tegenpartij');
+    var tp = Session.get('tegenpartij'),
+        search = Session.get('searchQuery');
     self.subscribe('afschriften',
       self.year.get(),
-      tp
+      tp,
+      search
     );
     if(tp) {
       Meteor.call('summary',
@@ -26,7 +28,7 @@ Template.afschriften.onRendered(function(){
 
 Template.afschriften.helpers({
   'years': function() {
-    return [2015, 2014, 2013, 2012];
+    return [2015, 2014, 2013, 2012, 2011, 2010];
   },
   'all': function(){
     return Afschriften.find({}, {sort: {date: -1}});

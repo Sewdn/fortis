@@ -22,6 +22,7 @@ FlowRouter.route('/tegenpartijen/:id?', {
 
 FlowRouter.route('/groepen/:id?', {
   action: function(params) {
+    Session.set('tegenpartij', null);
     Session.set('searchQuery', null);
     if(params.id) {
       Session.set('groep', params.id);

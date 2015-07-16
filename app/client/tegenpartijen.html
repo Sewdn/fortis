@@ -23,6 +23,11 @@
     <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
       <h2 class="mdl-card__title-text">{{getTitle}}</h2>
     </div>
+    {{#if number}}
+    <div class="mdl-card__supporting-text">
+      <h5>{{number}}</h5>
+    </div>
+    {{/if}}
     {{#with summary}}
       <table class="mdl-data-table mdl-js-data-table">
         <tbody>

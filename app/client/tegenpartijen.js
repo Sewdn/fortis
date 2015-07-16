@@ -49,6 +49,7 @@ Template.tegenpartijen.helpers({
 
 Template.tegenpartijen.events({
   "click tr": function(event, template){
+    console.log(this._id._str);
     template.selected.set(this._id._str);
   }
 });

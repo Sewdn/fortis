@@ -3,8 +3,9 @@ Template.tegenpartijen.onCreated(function(){
   this.selected = new ReactiveVar();
   this.summary = new ReactiveVar();
   this.autorun(function(){
-    var tp = self.selected.get();
-    self.subscribe('tegenpartijen');
+    var tp = self.selected.get(),
+        search = Session.get('searchQuery');
+    self.subscribe('tegenpartijen', search);
     if(tp) {
       Meteor.call('summary',
         tp,

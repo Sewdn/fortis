@@ -31,6 +31,12 @@ Meteor.publishComposite('afschriften', function(year, tegenpartij, search){
   };
 });
 
-Meteor.publish('tegenpartijen', function() {
-  return Tegenpartijen.find({});
+Meteor.publish('tegenpartijen', function(search) {
+  var q = {};
+  if(search) {
+    q = _.extend(q, {
+      ref: {$regex: new RegExp(search, "i")}
+    });
+  }
+  return Tegenpartijen.find(q);
 });

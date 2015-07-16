@@ -7,11 +7,14 @@
           {{#with selectedTegenpartij}}
             {{getTitle}}
           {{else}}
-          Alle verrichtingen
+            {{#with selectedGroep}}
+              {{title}}
+            {{else}}
+              Alle verrichtingen
+            {{/with}}
           {{/with}}
         </h2>
       </div>
-      {{#with selectedTegenpartij}}
       {{#with summary}}
       <table class="mdl-data-table mdl-js-data-table">
         <tbody>
@@ -25,7 +28,6 @@
           </tr>
         </tbody>
       </table>
-      {{/with}}
       {{/with}}
       <div class="mdl-card__actions mdl-card--border years">
         {{#each years}}

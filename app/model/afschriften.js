@@ -18,3 +18,5 @@ Tegenpartijen.helpers({
     return this.title || this.number || this.ref;
   }
 });
+
+Groepen = new Mongo.Collection('groepen');

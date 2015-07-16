@@ -1,4 +1,4 @@
-Meteor.publishComposite('afschriften', function(year, tegenpartij, search){
+Meteor.publishComposite('afschriften', function(year, tegenpartij, groep, search){
   var q = {};
   if(year){
     //check(year, Number);
@@ -10,6 +10,16 @@ Meteor.publishComposite('afschriften', function(year, tegenpartij, search){
   if(tegenpartij) {
     q = _.extend(q, {
       tegenpartij: new Mongo.ObjectID(tegenpartij)
+    });
+  }
+
+  if(groep) {
+    //lookup all tegenpartijen
+    var tps = _.map(Tegenpartijen.find({groups: new Mongo.ObjectID(groep)}).fetch(), function(t) {
+      return t._id;
+    });
+    q = _.extend(q, {
+      tegenpartij: {$in: tps}
     });
   }
 
@@ -39,4 +49,8 @@ Meteor.publish('tegenpartijen', function(search) {
     });
   }
   return Tegenpartijen.find(q);
+});
+
+Meteor.publish('groups', function() {
+  return Groepen.find();
 });

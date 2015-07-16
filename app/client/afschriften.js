@@ -5,15 +5,18 @@ Template.afschriften.onCreated(function(){
   this.summary = new ReactiveVar();
   this.autorun(function(){
     var tp = Session.get('tegenpartij'),
+        groep = Session.get('groep'),
         search = Session.get('searchQuery');
     self.subscribe('afschriften',
       self.year.get(),
       tp,
+      groep,
       search
     );
-    if(tp) {
+    if(tp || groep) {
       Meteor.call('summary',
         tp,
+        groep,
         self.year.get(),
       function(err, data) {
         self.summary.set(data);
@@ -53,6 +56,9 @@ Template.afschriften.helpers({
   },
   selectedTegenpartij: function() {
     return Tegenpartijen.findOne(new Mongo.ObjectID(Session.get('tegenpartij')));
+  },
+  selectedGroep: function() {
+    return Groepen.findOne(new Mongo.ObjectID(Session.get('groep')));
   },
   accentYear: function(year) {
     return Template.instance().year.get() === year ? "mdl-button--accent": "";

@@ -44,9 +44,11 @@ Meteor.publishComposite('afschriften', function(year, tegenpartij, groep, search
 Meteor.publish('tegenpartijen', function(search) {
   var q = {};
   if(search) {
-    q = _.extend(q, {
-      ref: {$regex: new RegExp(search, "i")}
-    });
+    q = _.extend(q, {$or:[
+      {ref: {$regex: new RegExp(search, "i")}},
+      {title: {$regex: new RegExp(search, "i")}},
+      {number: {$regex: new RegExp(search, "i")}}
+    ]});
   }
   return Tegenpartijen.find(q);
 });

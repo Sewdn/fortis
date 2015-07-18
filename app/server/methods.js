@@ -19,8 +19,6 @@ Meteor.methods({
       });
     }
 
-    console.log(q);
-
     if(year) {
       var start = new Date(year, 0, 1);
       var end = new Date(year, 11, 31);

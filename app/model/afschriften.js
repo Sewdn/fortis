@@ -1,9 +1,4 @@
 Afschriften = new Mongo.Collection('afschriften');
-if (Meteor.isServer) {
-  Afschriften._ensureIndex({
-    "DETAILS": "text"
-  });
-}
 
 Afschriften.helpers({
   getTegenpartij: function() {

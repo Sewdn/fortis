@@ -9,9 +9,22 @@ Afschriften.helpers({
 Tegenpartijen = new Mongo.Collection('tegenpartij');
 
 Tegenpartijen.helpers({
+  getProfile: function() {
+    return Profiles.findOne(this.profile);
+  },
   getTitle: function() {
-    return this.title || this.number || this.ref;
+    var t = this.title || this.number || this.ref;
+    if(this.profile){
+      console.log(this.profile);
+      var p = this.getProfile();
+      if(p){
+        t = this.getProfile().title + ' (' + t + ')';
+      }
+    }
+    return t;
   }
 });
 
 Groepen = new Mongo.Collection('groepen');
+
+Profiles = new Mongo.Collection('profiles');

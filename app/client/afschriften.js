@@ -17,6 +17,7 @@ Template.afschriften.onCreated(function(){
       Meteor.call('summary',
         tp,
         groep,
+        null,
         self.year.get(),
       function(err, data) {
         self.summary.set(data);
@@ -70,6 +71,7 @@ Template.afschriften.helpers({
 
 Template.afschriften.events({
   "click tr": function(event, template){
+    console.log(this);
     template.selected.set(this._id);
   },
   "click .years button": function(event, template){

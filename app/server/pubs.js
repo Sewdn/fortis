@@ -36,12 +36,19 @@ Meteor.publishComposite('afschriften', function(year, tegenpartij, groep, search
     children: [{
       find: function(afschrift) {
         return Tegenpartijen.find({_id: afschrift.tegenpartij});
-      }
+      },
+      children: [{
+        find: function(tegenpartij) {
+          if(tegenpartij.profile){
+            return Profiles.find({_id: tegenpartij.profile});
+          }
+        }
+      }]
     }]
   };
 });
 
-Meteor.publish('tegenpartijen', function(search) {
+Meteor.publishComposite('tegenpartijen', function(search) {
   var q = {};
   if(search) {
     q = _.extend(q, {$or:[
@@ -50,7 +57,18 @@ Meteor.publish('tegenpartijen', function(search) {
       {number: {$regex: new RegExp(search, "i")}}
     ]});
   }
-  return Tegenpartijen.find(q);
+  return {
+    find: function(){
+      return Tegenpartijen.find(q);
+    },
+    children: [{
+      find: function(tegenpartij) {
+        if(tegenpartij.profile){
+          return Profiles.find({_id: tegenpartij.profile});
+        }
+      }
+    }]
+  };
 });
 
 Meteor.publish('groups', function() {

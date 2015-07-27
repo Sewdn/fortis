@@ -72,7 +72,7 @@ db.afschriften.find({bank: 'fortis'}).forEach(function(record) {
     update.beschrijving = descr[0].replace("MEDEDELING : ", "").replace(" UITGEVOERD OP", "").replace(" VALUTADATUM", "").trim().toLowerCase();
   }
   //lookup tegenpartij
-  tp = tp.toLowerCase().replace('internet', '').trim();
+  tp = tp.toLowerCase().replace(/\s+/gi, ' ').replace('internet', '').trim();
   var tpRef = {ref: tp},
       tpRec = db.tegenpartij.findOne(tpRef);
   if(!tpRec){

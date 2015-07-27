@@ -19,6 +19,31 @@
 </div>
 <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
   {{#with selected}}
+    {{#with getProfile}}
+    <div class="demo-profile mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+      <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+        <h2 class="mdl-card__title-text">{{title}}</h2>
+      </div>
+      {{#with profileSummary}}
+        <table class="mdl-data-table mdl-js-data-table">
+          <tbody>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Som van alle verrichtingen</td>
+              <td><strong>{{eur sum}}</strong></td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Totaal aantal verrichtingen</td>
+              <td><strong>{{total}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      {{/with}}
+      <div class="mdl-card__actions mdl-card--border">
+        <a href="/tegenpartijen/{{_id._str}}" class="party mdl-button mdl-js-button mdl-js-ripple-effect">ga naar Detail</a>
+      </div>
+    </div>
+    <div class="demo-separator mdl-cell--1-col"></div>
+    {{/with}}
   <div class="demo-tegenpartij mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
     <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
       <h2 class="mdl-card__title-text">{{getTitle}}</h2>

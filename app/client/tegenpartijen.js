@@ -1,6 +1,7 @@
 Template.tegenpartijen.onCreated(function(){
   var self = this;
   this.selected = new ReactiveVar();
+  this.profileSummary = new ReactiveVar();
   this.summary = new ReactiveVar();
   this.autorun(function(){
     var tp = self.selected.get(),
@@ -12,6 +13,16 @@ Template.tegenpartijen.onCreated(function(){
       function(err, data) {
         self.summary.set(data);
       });
+      var tpO = Tegenpartijen.findOne(new Mongo.ObjectID(tp));
+      if(tpO && tpO.profile) {
+        Meteor.call('summary',
+          null,
+          null,
+          tpO.profile._str,
+        function(err, data) {
+          self.profileSummary.set(data);
+        });
+      }
     }
   });
 });
@@ -44,6 +55,9 @@ Template.tegenpartijen.helpers({
   },
   summary: function() {
     return Template.instance().summary.get();
+  },
+  profileSummary: function() {
+    return Template.instance().profileSummary.get();
   }
 });
 

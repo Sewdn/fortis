@@ -1,5 +1,5 @@
 Meteor.methods({
-  'summary': function(tp, groep, year) {
+  'summary': function(tp, groep, profile, year) {
 
     var q = {};
     
@@ -8,10 +8,20 @@ Meteor.methods({
         tegenpartij: new MongoInternals.NpmModule.ObjectID(tp)
       });
     }
-
+    var tps;
     if(groep) {
       //lookup all tegenpartijen
-      var tps = _.map(Tegenpartijen.find({groups: MongoInternals.NpmModule.ObjectID(groep)}).fetch(), function(t) {
+      tps = _.map(Tegenpartijen.find({groups: MongoInternals.NpmModule.ObjectID(groep)}).fetch(), function(t) {
+        return MongoInternals.NpmModule.ObjectID(t._id._str);
+      });
+      q = _.extend(q, {
+        tegenpartij: {$in: tps}
+      });
+    }
+
+    if(profile) {
+      //lookup all tegenpartijen
+      tps = _.map(Tegenpartijen.find({profile: MongoInternals.NpmModule.ObjectID(profile)}).fetch(), function(t) {
         return MongoInternals.NpmModule.ObjectID(t._id._str);
       });
       q = _.extend(q, {

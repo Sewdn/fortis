@@ -6,9 +6,10 @@ db.afschriften.find({bank: 'fortis'}).forEach(function(record) {
     }
     var update = {
       amount: parseFloat(record.BEDRAG.replace(',', '.')),
-      date: new Date(parseInt(d[2]), parseInt(d[1]) - 1, parseInt(d[0])),
+      date: new Date(parseInt(d[2],10), parseInt(d[1],10) - 1, parseInt(d[0],10)),
       type: 'overschrijving'
     };
+    
     var detect = false,
         tp;
     if(record.DETAILS.match(/BETALING MET BANKKAART/i) ||
@@ -110,16 +111,17 @@ db.afschriften.find({bank: 'fortis'}).forEach(function(record) {
         title = title.replace('INTERNET', ''),
         title = title.trim();
         title = title.toLowerCase();
-        printjson(title);
+        //printjson(title);
         tpRef.title = title;
       } else {
-        //no title found
-        printjson(record.DETAILS);
+        //TODO: no title found
+        //printjson(record.DETAILS);
       }
     }
     var insert = db.tegenpartij.insert(tpRef);
     tpRec = tpRef;
   }
   update.tegenpartij = tpRec._id;
+  update.tegenpartijref = tpRec.ref;
   db.afschriften.update({_id: record._id}, {$set: update});
 });

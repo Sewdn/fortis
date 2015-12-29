@@ -24,14 +24,19 @@ Meteor.publishComposite('afschriften', function(year, tegenpartij, groep, search
   }
 
   if(search) {
+    var regex = new RegExp(search, "i");
     q = _.extend(q, {
-      DETAILS: {$regex: new RegExp(search, "i")}
+      $or: [
+        {"JAAR + REFERTE": {$regex: regex}},
+        {DETAILS: {$regex: regex}},
+        {tegenpartijref: {$regex: regex}}
+      ]
     });
   }
 
   return {
     find: function() {
-      return Afschriften.find(q, {sort: {date: -1}, limit: 15});
+      return Afschriften.find(q, {sort: {date: -1}, limit: 40});
     },
     children: [{
       find: function(afschrift) {
